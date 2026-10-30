@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jay & Naty</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap">
+<style>
+  /* Layout: one centered column, polaroids side by side on wide screens, stacked on phones */
+  :root {
+    --pink:#ff6b9a; --deep:#c2185b; --bg1:#ffe4ec; --bg2:#fff5f8; --bg3:#ffd6e3;
+    --text:#5a2a3a; --card:#ffffff; --glass:rgba(255,255,255,.75);
+    --script:'Great Vibes', 'Brush Script MT', cursive;
+    --body:'Quicksand', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; font-family:var(--body); color:var(--text); text-align:center;
+    background:linear-gradient(160deg,var(--bg1),var(--bg2) 60%,var(--bg3)) fixed;
+    background-color:var(--bg2);
+    min-height:100%; overflow-x:hidden;
+  }
+  .hearts { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .hearts span { position:absolute; bottom:-40px; color:var(--pink); opacity:.6; animation:rise linear forwards; }
+  @keyframes rise { to { transform:translateY(-110vh) rotate(30deg); opacity:0; } }
+  main {
+    position:relative; z-index:1; max-width:960px; margin:0 auto;
+    padding-block:48px 40px;
+    padding-left:max(16px, env(safe-area-inset-left, 0px));
+    padding-right:max(16px, env(safe-area-inset-right, 0px));
+    display:flex; flex-direction:column; align-items:center; gap:40px;
+  }
+  header { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  h1 { font-family:var(--script); font-weight:400; font-size:clamp(3.4rem,15vw,7rem); color:var(--deep); line-height:1; margin:0; text-wrap:balance; }
+  h1 .amp { color:var(--pink); }
+  .sub { font-size:clamp(.9rem,3.5vw,1.15rem); letter-spacing:.2em; text-transform:uppercase; margin:0; }
+  .badge { display:inline-block; padding:10px 20px; border-radius:999px; background:var(--pink); color:var(--card); font-weight:600; font-size:clamp(.9rem,3.8vw,1rem); box-shadow:0 6px 20px rgba(255,107,154,.4); }
+  .photos { display:flex; gap:28px; justify-content:center; flex-wrap:wrap; width:100%; }
+  .photo { background:var(--card); padding:10px 10px 50px; border-radius:6px; box-shadow:0 12px 30px rgba(194,24,91,.18); width:min(100%,360px); max-width:100%; transition:transform .3s; position:relative; margin:0; }
+  .photo:nth-child(1) { transform:rotate(-3deg); }
+  .photo:nth-child(2) { transform:rotate(3deg); }
+  .photo:hover { transform:rotate(0) scale(1.03); }
+  .photo img { width:100%; max-width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:3px; display:block; }
+  .photo:nth-child(2) img { object-position:50% 45%; }
+  .photo figcaption { position:absolute; bottom:10px; left:0; right:0; font-family:var(--script); font-size:1.8rem; color:var(--deep); }
+  .letter { background:var(--glass); border-radius:20px; padding:32px clamp(18px,5vw,40px); box-shadow:0 10px 30px rgba(194,24,91,.1); line-height:1.8; font-size:clamp(1rem,4vw,1.1rem); max-width:640px; width:100%; }
+  .letter h2 { font-family:var(--script); font-weight:400; font-size:clamp(2.2rem,9vw,2.8rem); color:var(--deep); margin:0 0 8px; }
+  .letter p { margin:0; }
+  .counter { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; width:100%; max-width:560px; }
+  .counter div { background:var(--card); border-radius:16px; padding:14px 6px; box-shadow:0 6px 18px rgba(194,24,91,.12); }
+  .counter b { display:block; font-size:clamp(1.5rem,6vw,2rem); color:var(--deep); font-variant-numeric:tabular-nums; }
+  .counter small { text-transform:uppercase; letter-spacing:.1em; font-size:.7rem; }
+  @media (max-width:420px) { .counter { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  .surprise { display:flex; flex-direction:column; align-items:center; gap:16px; width:100%; }
+  button { font:inherit; font-weight:600; background:var(--deep); color:var(--card); border:0; border-radius:999px; padding:16px 32px; min-height:52px; cursor:pointer; font-size:1.05rem; box-shadow:0 6px 20px rgba(194,24,91,.35); transition:transform .15s; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+  button:hover, button:active { transform:scale(1.05); }
+  button:focus-visible { outline:3px solid var(--pink); outline-offset:3px; }
+  #msg { font-size:clamp(1.1rem,4.5vw,1.3rem); min-height:1.6em; color:var(--deep); max-width:520px; }
+  footer { font-size:.9rem; opacity:.7; }
+  .beat { display:inline-block; animation:beat 1.2s infinite; }
+  @keyframes beat { 0%,100%{transform:scale(1)} 15%{transform:scale(1.25)} 30%{transform:scale(1)} }
+  @media (max-width:600px) {
+    main { gap:32px; padding-block:32px; }
+    .photos { gap:22px; }
+    .photo { width:min(100%,320px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .beat, .hearts span { animation:none; }
+    .hearts { display:none; }
+  }
+</style>
+
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+<main>
+  <header>
+    <h1>Jay <span class="amp">&amp;</span> Naty</h1>
+    <p class="sub">One month of us</p>
+    <span class="badge"><span class="beat">❤</span> Happy 1 Month Anniversary <span class="beat">❤</span></span>
+  </header>
+
+  <section class="photos">
+    <figure class="photo"><img src="img/photo1.jpg" alt="Jay and Naty taking a mirror selfie"><figcaption>us ♡</figcaption></figure>
+    <figure class="photo"><img src="img/photo2.jpg" alt="Jay and Naty laughing at the arcade"><figcaption>forever ♡</figcaption></figure>
+  </section>
+
+  <section class="letter">
+    <h2>To my love</h2>
+    <p>One month ago, everything changed. Every day since has been brighter, warmer, and full of smiles because of you.
+    Thank you for the laughs, the late-night talks, and all the little moments that already mean the world.
+    This is just the beginning of our story, and I can't wait to write every chapter with you.</p>
+  </section>
+
+  <section class="counter">
+    <div><b>1</b><small>Month</small></div>
+    <div><b>30+</b><small>Days</small></div>
+    <div><b>∞</b><small>Kisses</small></div>
+    <div><b>1</b><small>Heart</small></div>
+  </section>
+
+  <section class="surprise">
+    <button id="love" type="button">Tap for a surprise 💌</button>
+    <div id="msg" aria-live="polite"></div>
+  </section>
+
+  <footer>Made with <span class="beat">❤</span> for Jay &amp; Naty</footer>
+</main>
+<script>
+  const h = document.getElementById('hearts');
+  const icons = ['❤','💕','💖','💗','♡'];
+  const small = window.matchMedia('(max-width:600px)').matches;
+  function spawn(n = 1) {
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement('span');
+      s.textContent = icons[Math.floor(Math.random() * icons.length)];
+      s.style.left = Math.random() * 95 + '%';
+      s.style.fontSize = (small ? 12 : 14) + Math.random() * (small ? 18 : 26) + 'px';
+      const dur = 6 + Math.random() * 8;
+      s.style.animationDuration = dur + 's';
+      h.appendChild(s);
+      setTimeout(() => s.remove(), dur * 1000);
+    }
+  }
+  setInterval(spawn, small ? 800 : 500);
+  const notes = [
+    "You're my favorite person in the whole world 💖",
+    "Here's to many more months together 🥂",
+    "Every moment with you is my favorite moment ✨",
+    "I love you more than yesterday, less than tomorrow 💕",
+    "Month one down, forever to go ❤"
+  ];
+  let k = 0;
+  document.getElementById('love').addEventListener('click', () => {
+    document.getElementById('msg').textContent = notes[k++ % notes.length];
+    spawn(small ? 15 : 25);
+  });
+</script>
+
+</html>
