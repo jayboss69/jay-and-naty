@@ -76,7 +76,51 @@
   .scroll-cue span { width:1px; height:44px; background:linear-gradient(var(--blush),transparent); animation:drip 2s ease-in-out infinite; }
 
   /* ---------- live clock ---------- */
-  .clock { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; width:100%; max-width:620px; }
+  #time { gap:28px; }
+  .mega { display:flex; flex-direction:column; align-items:center; line-height:.85; }
+  .mega b { font-family:var(--serif); font-weight:500; font-size:clamp(9rem,46vw,20rem); font-variant-numeric:tabular-nums; letter-spacing:-.04em;
+    background:linear-gradient(180deg,#fff 10%,var(--blush) 55%,var(--rose)); -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 0 40px rgba(255,77,141,.45)); }
+  .mega span { font-family:var(--script); font-size:clamp(2.6rem,11vw,4.4rem); color:var(--blush); margin-top:-.1em; }
+  .since strong { color:var(--ink); font-weight:600; }
+  .totals { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 26px; max-width:720px; }
+  .totals div { display:flex; flex-direction:column; align-items:center; }
+  .totals b { font-weight:600; font-size:clamp(1.1rem,4.4vw,1.4rem); font-variant-numeric:tabular-nums; color:var(--ink); }
+  .totals small { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+  .bars { display:flex; flex-direction:column; gap:22px; width:100%; max-width:620px; text-align:left; margin-top:8px; }
+  .bar-top { display:flex; justify-content:space-between; gap:12px; font-weight:600; margin-bottom:10px; }
+  .bar-top span:last-child { color:var(--blush); font-variant-numeric:tabular-nums; }
+  .track { position:relative; height:14px; border-radius:99px; background:rgba(255,255,255,.08); border:1px solid var(--line); }
+  .fill { position:absolute; inset:0 auto 0 0; width:0; border-radius:99px; overflow:hidden;
+    background:linear-gradient(90deg,#c2185b,var(--rose),var(--blush)); box-shadow:0 0 18px rgba(255,77,141,.6); transition:width 1s linear; }
+  .fill::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent); background-size:50% 100%; background-repeat:no-repeat; animation:sweep 2.4s ease-in-out infinite; }
+  .pip { position:absolute; top:50%; left:0; translate:-50% -52%; font-style:normal; font-size:1.3rem; color:var(--rose); text-shadow:0 0 10px rgba(255,77,141,.9); transition:left 1s linear; animation:beat 1.2s infinite; }
+  .bar-sub { margin:8px 0 0; color:var(--muted); font-size:.88rem; }
+
+  /* ---------- calendar ---------- */
+  .cal { width:100%; max-width:440px; background:var(--glass); border:1px solid var(--line); border-radius:24px; padding:20px clamp(12px,4vw,24px) 18px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+  .cal-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .cal-head p { margin:0; font-family:var(--serif); font-style:italic; font-size:1.6rem; }
+  .cal-nav { width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--ink); font-size:1.5rem; cursor:pointer; touch-action:manipulation; }
+  .cal-nav:hover { background:rgba(255,255,255,.08); }
+  .cal-nav:focus-visible { outline:2px solid var(--blush); outline-offset:2px; }
+  .cal-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:6px; }
+  .cal-grid .wd { font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); padding-bottom:4px; }
+  .day { aspect-ratio:1; max-width:100%; display:grid; place-items:center; border-radius:12px; font-variant-numeric:tabular-nums; font-size:.95rem; color:var(--muted); position:relative; }
+  .day.together { background:linear-gradient(150deg,rgba(255,77,141,.55),rgba(194,24,91,.55)); color:#fff; font-weight:600; }
+  .day.start { background:linear-gradient(150deg,var(--gold),var(--rose)); color:var(--night); box-shadow:0 0 18px rgba(255,213,158,.6); }
+  .day.mark { outline:2px solid var(--gold); outline-offset:-2px; }
+  .day.today { box-shadow:0 0 0 2px var(--ink), 0 0 20px rgba(255,255,255,.4); }
+  .day.start::after, .day.mark::after { content:"❤"; position:absolute; top:2px; right:4px; font-size:.55rem; }
+  .legend { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 16px; margin-top:16px; font-size:.78rem; color:var(--muted); }
+  .legend span { display:flex; align-items:center; gap:6px; }
+  .dot { width:12px; height:12px; border-radius:4px; display:inline-block; }
+  .dot.together { background:var(--rose); }
+  .dot.start { background:linear-gradient(150deg,var(--gold),var(--rose)); }
+  .dot.mark { outline:2px solid var(--gold); outline-offset:-2px; }
+  .dot.today { box-shadow:0 0 0 2px var(--ink); }
+
+  .clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; width:100%; max-width:480px; }
   .clock div { background:var(--glass); border:1px solid var(--line); border-radius:18px; padding:18px 4px 14px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
   .clock b { display:block; font-family:var(--serif); font-weight:500; font-size:clamp(2rem,9vw,3.4rem); line-height:1; font-variant-numeric:tabular-nums; color:var(--ink); }
   .clock small { display:block; margin-top:8px; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--blush); }
@@ -138,9 +182,13 @@
   @keyframes pulse { 50% { opacity:.35; } }
   @keyframes drip { 0% { transform:scaleY(0); transform-origin:top; } 50% { transform:scaleY(1); transform-origin:top; } 51% { transform-origin:bottom; } 100% { transform:scaleY(0); transform-origin:bottom; } }
   @keyframes blink { 50% { opacity:0; } }
+  @keyframes sweep { from { background-position:-100% 0; } to { background-position:250% 0; } }
+  @keyframes beat { 0%,100% { transform:scale(1); } 15% { transform:scale(1.3); } 30% { transform:scale(1); } }
 
   @media (max-width:480px) {
     section { padding-block:56px; }
+    .cal-grid { gap:4px; }
+    .day { border-radius:9px; font-size:.85rem; }
     .clock { gap:8px; }
     .clock div { border-radius:14px; padding:14px 2px 12px; }
     .clock small { letter-spacing:.12em; font-size:.62rem; }
@@ -176,15 +224,62 @@
   </section>
 
   <section id="time" class="reveal">
-    <p class="eyebrow">Together for</p>
-    <h2>Every second counts</h2>
+    <p class="eyebrow">We have been together for</p>
+    <div class="mega">
+      <b id="d">0</b>
+      <span>days</span>
+    </div>
     <div class="clock" aria-live="off">
-      <div><b id="d">0</b><small>Days</small></div>
       <div><b id="h">00</b><small>Hours</small></div>
       <div><b id="m">00</b><small>Minutes</small></div>
       <div><b id="s">00</b><small>Seconds</small></div>
     </div>
-    <p class="since">since 30 September 2026, and still counting</p>
+    <p class="since">since <strong>27 September 2026, 3:00</strong> Czech time · <span id="ym">1 month</span></p>
+
+    <div class="totals">
+      <div><b id="tw">0</b><small>weeks</small></div>
+      <div><b id="th">0</b><small>hours</small></div>
+      <div><b id="tm">0</b><small>minutes</small></div>
+      <div><b id="ts">0</b><small>seconds</small></div>
+      <div><b id="tb">0</b><small>heartbeats each ♡</small></div>
+    </div>
+
+    <div class="bars">
+      <div class="bar">
+        <div class="bar-top"><span id="b1l">Month 2</span><span id="b1p">0%</span></div>
+        <div class="track"><div class="fill" id="b1"></div><i class="pip" id="b1h">❤</i></div>
+        <p class="bar-sub" id="b1s"></p>
+      </div>
+      <div class="bar">
+        <div class="bar-top"><span>100 days together</span><span id="b2p">0%</span></div>
+        <div class="track"><div class="fill" id="b2"></div><i class="pip" id="b2h">❤</i></div>
+        <p class="bar-sub" id="b2s"></p>
+      </div>
+      <div class="bar">
+        <div class="bar-top"><span>Our first year</span><span id="b3p">0%</span></div>
+        <div class="track"><div class="fill" id="b3"></div><i class="pip" id="b3h">❤</i></div>
+        <p class="bar-sub" id="b3s"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="calendar" class="reveal">
+    <p class="eyebrow">Our calendar</p>
+    <h2>Every day with you</h2>
+    <div class="cal">
+      <div class="cal-head">
+        <button class="cal-nav" id="prev" type="button" aria-label="Previous month">‹</button>
+        <p id="calTitle">October 2026</p>
+        <button class="cal-nav" id="nextM" type="button" aria-label="Next month">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="legend">
+        <span><i class="dot together"></i>together</span>
+        <span><i class="dot start"></i>day one</span>
+        <span><i class="dot mark"></i>our 27th</span>
+        <span><i class="dot today"></i>today</span>
+      </div>
+    </div>
   </section>
 
   <section id="us" class="reveal">
@@ -312,20 +407,93 @@ env.addEventListener('click', () => {
   }, reduce ? 0 : 1300);
 });
 
-/* ---------- live clock ---------- */
-const start = new Date(2026, 8, 30, 0, 0, 0);
+/* ---------- live clock (all anniversaries at 3:00 Prague time) ---------- */
+const TZ = 'Europe/Prague';
+const partsFmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' });
+function pragueParts(ms) {
+  const p = {}; partsFmt.formatToParts(new Date(ms)).forEach(x => p[x.type] = +x.value);
+  return p;
+}
+// UTC timestamp for a wall-clock time in Prague (handles summer/winter time)
+function prague(y, mo, d, h = 0) {
+  const guess = Date.UTC(y, mo, d, h);
+  const p = pragueParts(guess);
+  const offset = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second) - guess;
+  return guess - offset;
+}
+const START = prague(2026, 8, 27, 3);               // 27 Sep 2026, 3:00
+const monthsary = n => prague(2026, 8 + n, 27, 3);  // the 27th, n months later
+const $ = id => document.getElementById(id);
 const pad = n => String(n).padStart(2, '0');
+const fmt = n => n.toLocaleString('cs-CZ');
+const DAY = 86400000;
+function setBar(i, pct, label) {
+  const v = Math.max(0, Math.min(100, pct));
+  $('b' + i).style.width = v + '%';
+  $('b' + i + 'h').style.left = v + '%';
+  $('b' + i + 'p').textContent = v.toFixed(v < 10 ? 2 : 1) + '%';
+  $('b' + i + 's').textContent = label;
+}
+function left(ms) {
+  const d = Math.floor(ms / DAY), h = Math.floor(ms % DAY / 3600000), m = Math.floor(ms % 3600000 / 60000);
+  return (d ? d + (d === 1 ? ' day ' : ' days ') : '') + h + ' h ' + m + ' min';
+}
 function tick() {
-  let diff = Math.max(0, Date.now() - start) / 1000;
-  const d = Math.floor(diff / 86400); diff -= d * 86400;
-  const h = Math.floor(diff / 3600); diff -= h * 3600;
-  const m = Math.floor(diff / 60); const s = Math.floor(diff - m * 60);
-  document.getElementById('d').textContent = d;
-  document.getElementById('h').textContent = pad(h);
-  document.getElementById('m').textContent = pad(m);
-  document.getElementById('s').textContent = pad(s);
+  const now = Date.now(), ms = Math.max(0, now - START);
+  let sec = Math.floor(ms / 1000);
+  $('d').textContent = Math.floor(sec / 86400);
+  $('h').textContent = pad(Math.floor(sec % 86400 / 3600));
+  $('m').textContent = pad(Math.floor(sec % 3600 / 60));
+  $('s').textContent = pad(sec % 60);
+  $('tw').textContent = fmt(Math.floor(sec / 604800));
+  $('th').textContent = fmt(Math.floor(sec / 3600));
+  $('tm').textContent = fmt(Math.floor(sec / 60));
+  $('ts').textContent = fmt(sec);
+  $('tb').textContent = fmt(Math.floor(sec * 75 / 60));
+
+  // whole months + leftover days
+  let n = 0; while (monthsary(n + 1) <= now) n++;
+  const extra = Math.floor((now - monthsary(n)) / DAY);
+  $('ym').textContent = `${n} ${n === 1 ? 'month' : 'months'}${extra ? `, ${extra} ${extra === 1 ? 'day' : 'days'}` : ''}`;
+
+  const a = monthsary(n), b = monthsary(n + 1);
+  $('b1l').textContent = `Month ${n + 1}`;
+  setBar(1, (now - a) / (b - a) * 100, `${left(b - now)} until month ${n + 1} · ${new Date(b).toLocaleDateString('en-GB', { timeZone: TZ, day: 'numeric', month: 'long' })}`);
+  const hundred = START + 100 * DAY;
+  setBar(2, ms / (100 * DAY) * 100, now < hundred ? `${left(hundred - now)} to go · ${new Date(hundred).toLocaleDateString('en-GB', { timeZone: TZ, day: 'numeric', month: 'long', year: 'numeric' })}` : '100 days done ♡');
+  const year = monthsary(12);
+  setBar(3, ms / (year - START) * 100, now < year ? `${left(year - now)} until 27 September 2027` : 'One whole year ♡');
 }
 tick(); setInterval(tick, 1000);
+
+/* ---------- calendar ---------- */
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const todayP = pragueParts(Date.now());
+const todayKey = todayP.year * 10000 + todayP.month * 100 + todayP.day;
+const startKey = 20260927;
+let calY = todayP.year, calM = todayP.month - 1;
+function renderCal() {
+  const grid = $('calGrid'); grid.textContent = '';
+  ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(w => { const e = document.createElement('div'); e.className = 'wd'; e.textContent = w; grid.appendChild(e); });
+  const first = (new Date(Date.UTC(calY, calM, 1)).getUTCDay() + 6) % 7;
+  const days = new Date(Date.UTC(calY, calM + 1, 0)).getUTCDate();
+  for (let i = 0; i < first; i++) grid.appendChild(document.createElement('div'));
+  for (let d = 1; d <= days; d++) {
+    const key = calY * 10000 + (calM + 1) * 100 + d, e = document.createElement('div');
+    e.className = 'day'; e.textContent = d;
+    if (key >= startKey && key <= todayKey) e.classList.add('together');
+    if (key === startKey) { e.classList.add('start'); e.title = 'Day one ♡'; }
+    else if (d === 27 && key > startKey) { e.classList.add('mark'); e.title = 'Our monthly anniversary'; }
+    if (key === todayKey) e.classList.add('today');
+    grid.appendChild(e);
+  }
+  $('calTitle').textContent = `${MONTHS[calM]} ${calY}`;
+  $('prev').disabled = calY * 12 + calM <= 2026 * 12 + 8;
+  $('prev').style.opacity = $('prev').disabled ? .3 : 1;
+}
+$('prev').addEventListener('click', () => { if (--calM < 0) { calM = 11; calY--; } renderCal(); });
+$('nextM').addEventListener('click', () => { if (++calM > 11) { calM = 0; calY++; } renderCal(); });
+renderCal();
 
 /* ---------- reveal on scroll ---------- */
 const typeEl = document.getElementById('type');
