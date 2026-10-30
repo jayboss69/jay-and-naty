@@ -65,11 +65,11 @@
 
   /* ---------- hero ---------- */
   #hero { min-height:100svh; justify-content:center; gap:18px; }
-  .names { font-family:var(--script); font-weight:400; line-height:.95; margin:0; font-size:clamp(4.6rem,22vw,10rem);
+  .names { font-family:var(--script); font-weight:400; line-height:1.2; margin:0; font-size:clamp(4.2rem,20vw,10rem); max-width:100%;
     background:linear-gradient(100deg,var(--blush) 0%,#fff 25%,var(--rose) 50%,var(--gold) 75%,var(--blush) 100%);
     background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation:shine 6s linear infinite; filter:drop-shadow(0 0 30px rgba(255,77,141,.35)); padding:0 .15em; }
-  .names .amp { display:block; font-size:.55em; line-height:1; }
+    animation:shine 6s linear infinite; filter:drop-shadow(0 0 30px rgba(255,77,141,.35)); padding:.1em .35em .2em; }
+  .names .amp { display:block; font-size:.55em; line-height:1.1; }
   .big-one { display:flex; align-items:baseline; gap:12px; font-family:var(--serif); font-style:italic; color:var(--blush); font-size:clamp(1.3rem,5vw,1.8rem); margin:0; }
   .big-one b { font-family:var(--serif); font-style:normal; font-size:clamp(3rem,13vw,5rem); color:var(--ink); font-weight:500; line-height:1; }
   .scroll-cue { margin-top:28px; color:var(--muted); font-size:.75rem; letter-spacing:.3em; text-transform:uppercase; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:8px; }
@@ -77,11 +77,11 @@
 
   /* ---------- live clock ---------- */
   #time { gap:28px; }
-  .mega { display:flex; flex-direction:column; align-items:center; line-height:.85; }
-  .mega b { font-family:var(--serif); font-weight:500; font-size:clamp(9rem,46vw,20rem); font-variant-numeric:tabular-nums; letter-spacing:-.04em;
+  .mega { display:flex; flex-direction:column; align-items:center; line-height:1; max-width:100%; }
+  .mega b { font-family:var(--serif); font-weight:500; display:block; font-size:clamp(7rem,40vw,18rem); font-variant-numeric:lining-nums tabular-nums; line-height:1.05; padding:.04em .12em .06em;
     background:linear-gradient(180deg,#fff 10%,var(--blush) 55%,var(--rose)); -webkit-background-clip:text; background-clip:text; color:transparent;
     filter:drop-shadow(0 0 40px rgba(255,77,141,.45)); }
-  .mega span { font-family:var(--script); font-size:clamp(2.6rem,11vw,4.4rem); color:var(--blush); margin-top:-.1em; }
+  .mega span { font-family:var(--script); font-size:clamp(2.6rem,11vw,4.4rem); color:var(--blush); line-height:1.2; padding:0 .2em; }
   .since strong { color:var(--ink); font-weight:600; }
   .totals { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 26px; max-width:720px; }
   .totals div { display:flex; flex-direction:column; align-items:center; }
@@ -122,7 +122,7 @@
 
   .clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; width:100%; max-width:480px; }
   .clock div { background:var(--glass); border:1px solid var(--line); border-radius:18px; padding:18px 4px 14px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
-  .clock b { display:block; font-family:var(--serif); font-weight:500; font-size:clamp(2rem,9vw,3.4rem); line-height:1; font-variant-numeric:tabular-nums; color:var(--ink); }
+  .clock b { display:block; font-family:var(--serif); font-weight:500; font-size:clamp(2rem,9vw,3.4rem); line-height:1; font-variant-numeric:lining-nums tabular-nums; color:var(--ink); }
   .clock small { display:block; margin-top:8px; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--blush); }
   .since { color:var(--muted); margin:0; font-size:.95rem; }
 
@@ -131,13 +131,13 @@
   .card { width:min(100%,340px); aspect-ratio:3/4.4; max-width:100%; perspective:1200px; cursor:pointer; border:0; padding:0; background:none; color:inherit; font:inherit; }
   .card:focus-visible { outline:2px solid var(--blush); outline-offset:6px; border-radius:10px; }
   .card-inner { position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .8s cubic-bezier(.2,.8,.2,1); transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg)) rotateZ(var(--rz,0deg)); }
-  .card:nth-child(1) .card-inner { --rz:-3deg; }
-  .card:nth-child(2) .card-inner { --rz:3deg; }
+  .card:nth-child(odd) .card-inner { --rz:-3deg; }
+  .card:nth-child(even) .card-inner { --rz:3deg; }
+  .card:nth-child(3n) .card-inner { --rz:-1.5deg; }
   .card.flipped .card-inner { transform:rotateY(180deg) rotateZ(0deg); }
   .face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:8px; overflow:hidden; }
   .front { background:#fff7fa; padding:10px 10px 56px; box-shadow:0 25px 60px rgba(0,0,0,.5), 0 0 40px rgba(255,77,141,.18); }
   .front img { width:100%; height:100%; object-fit:cover; border-radius:3px; display:block; }
-  .card:nth-child(2) .front img { object-position:50% 48%; }
   .front figcaption { position:absolute; left:0; right:0; bottom:10px; font-family:var(--script); font-size:2rem; color:#b5124e; }
   .back { transform:rotateY(180deg); background:linear-gradient(150deg,#ff6e9e,#8e1c58); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:28px; box-shadow:0 25px 60px rgba(0,0,0,.5); }
   .back p { margin:0; font-family:var(--serif); font-style:italic; font-size:1.5rem; line-height:1.35; color:#fff; }
@@ -147,7 +147,8 @@
   /* ---------- letter ---------- */
   .letter { width:100%; max-width:620px; text-align:left; background:var(--glass); border:1px solid var(--line); border-radius:24px; padding:36px clamp(20px,6vw,48px); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
   .letter .to { font-family:var(--script); font-size:clamp(2.4rem,9vw,3rem); color:var(--blush); margin:0 0 8px; }
-  .letter p { font-family:var(--serif); font-size:clamp(1.2rem,4.6vw,1.4rem); line-height:1.6; margin:0; min-height:9em; white-space:pre-wrap; }
+  .letter p { font-family:var(--serif); font-size:clamp(1.2rem,4.6vw,1.4rem); line-height:1.6; margin:0; white-space:pre-wrap; }
+  .letter #type { min-height:8em; }
   .caret { display:inline-block; width:2px; height:1.1em; background:var(--blush); vertical-align:-.15em; margin-left:2px; animation:blink 1s steps(1) infinite; }
   .letter .sign { font-family:var(--script); font-size:2rem; color:var(--blush); text-align:right; margin:16px 0 0; }
 
@@ -184,6 +185,50 @@
   @keyframes blink { 50% { opacity:0; } }
   @keyframes sweep { from { background-position:-100% 0; } to { background-position:250% 0; } }
   @keyframes beat { 0%,100% { transform:scale(1); } 15% { transform:scale(1.3); } 30% { transform:scale(1); } }
+
+  /* ---------- shared wide-layout pieces ---------- */
+  .time-top, .time-side, .time-bottom, .reasons { display:flex; flex-direction:column; align-items:center; gap:24px; width:100%; }
+  .time-bottom { gap:40px; margin-top:16px; }
+  .reasons { max-width:620px; }
+  .words { gap:56px; }
+
+  @media (min-width:960px) {
+    section { padding-block:110px; }
+    h2 { font-size:3.4rem; }
+    .names { white-space:nowrap; font-size:clamp(7rem,11vw,12rem); }
+    .names .amp { display:inline; font-size:.7em; padding:0 .15em; }
+    .big-one { font-size:2.2rem; }
+    .big-one b { font-size:6rem; }
+
+    #time { max-width:1240px; margin:0 auto; }
+    .time-top { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:64px; max-width:1160px; }
+    .time-side { align-items:stretch; text-align:left; gap:28px; }
+    .time-side .since { font-size:1.1rem; }
+    .clock { max-width:none; gap:16px; }
+    .clock div { padding:26px 8px 20px; }
+    .clock b { font-size:4.6rem; }
+    .clock small { font-size:.78rem; }
+    .totals { justify-content:space-between; max-width:none; gap:16px; }
+    .totals div { align-items:flex-start; }
+    .totals b { font-size:1.6rem; }
+    .mega b { font-size:clamp(14rem,22vw,22rem); }
+
+    .time-bottom { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); align-items:center; gap:64px; max-width:1160px; }
+    .bars { max-width:none; gap:36px; margin:0; }
+    .track { height:18px; }
+    .bar-top { font-size:1.15rem; }
+    .cal { max-width:none; }
+
+    .photos { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:1160px; gap:64px 48px; }
+    .card { width:100%; }
+
+    .words { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); align-items:center; max-width:1240px; margin:0 auto; gap:64px; }
+    .letter, .reasons { max-width:none; }
+    .reason-box { max-width:none; min-height:220px; }
+
+    .arena { max-width:760px; height:220px; }
+    #question h2 { max-width:900px; }
+  }
 
   @media (max-width:480px) {
     section { padding-block:56px; }
@@ -225,10 +270,12 @@
 
   <section id="time" class="reveal">
     <p class="eyebrow">We have been together for</p>
+    <div class="time-top">
     <div class="mega">
       <b id="d">0</b>
       <span>days</span>
     </div>
+    <div class="time-side">
     <div class="clock" aria-live="off">
       <div><b id="h">00</b><small>Hours</small></div>
       <div><b id="m">00</b><small>Minutes</small></div>
@@ -243,7 +290,10 @@
       <div><b id="ts">0</b><small>seconds</small></div>
       <div><b id="tb">0</b><small>heartbeats each ♡</small></div>
     </div>
+    </div>
+    </div>
 
+    <div class="time-bottom">
     <div class="bars">
       <div class="bar">
         <div class="bar-top"><span id="b1l">Month 2</span><span id="b1p">0%</span></div>
@@ -261,12 +311,7 @@
         <p class="bar-sub" id="b3s"></p>
       </div>
     </div>
-  </section>
-
-  <section id="calendar" class="reveal">
-    <p class="eyebrow">Our calendar</p>
-    <h2>Every day with you</h2>
-    <div class="cal">
+    <div class="cal" id="calendar">
       <div class="cal-head">
         <button class="cal-nav" id="prev" type="button" aria-label="Previous month">‹</button>
         <p id="calTitle">October 2026</p>
@@ -280,42 +325,66 @@
         <span><i class="dot today"></i>today</span>
       </div>
     </div>
+    </div>
   </section>
 
   <section id="us" class="reveal">
     <p class="eyebrow">Our moments</p>
-    <h2>Just us</h2>
+    <h2>Just us, everywhere</h2>
     <div class="photos">
       <button class="card" type="button" aria-label="Flip photo">
         <div class="card-inner">
-          <figure class="face front" style="margin:0"><img src="img/photo1.jpg" alt="Jay and Naty taking a mirror selfie"><figcaption>us ♡</figcaption></figure>
+          <figure class="face front" style="margin:0"><img src="img/photo1.jpg" alt="Jay and Naty taking a mirror selfie" loading="lazy" style="object-position:50% 40%"><figcaption>us ♡</figcaption></figure>
           <div class="face back"><span>💗</span><p>Best-looking couple in any elevator. Facts.</p></div>
         </div>
       </button>
       <button class="card" type="button" aria-label="Flip photo">
         <div class="card-inner">
-          <figure class="face front" style="margin:0"><img src="img/photo2.jpg" alt="Jay and Naty laughing at the arcade"><figcaption>forever ♡</figcaption></figure>
+          <figure class="face front" style="margin:0"><img src="img/photo2.jpg" alt="Jay and Naty laughing at the arcade" loading="lazy" style="object-position:50% 48%"><figcaption>game on ♡</figcaption></figure>
           <div class="face back"><span>🎮</span><p>You're the only prize I ever wanted to win.</p></div>
+        </div>
+      </button>
+      <button class="card" type="button" aria-label="Flip photo">
+        <div class="card-inner">
+          <figure class="face front" style="margin:0"><img src="img/photo3.jpg" alt="Jay and Naty kissing by the pool" loading="lazy" style="object-position:50% 35%"><figcaption>sun &amp; kisses</figcaption></figure>
+          <div class="face back"><span>🌴</span><p>Paradise is anywhere you are.</p></div>
+        </div>
+      </button>
+      <button class="card" type="button" aria-label="Flip photo">
+        <div class="card-inner">
+          <figure class="face front" style="margin:0"><img src="img/photo4.jpg" alt="Naty kissing Jay's cheek" loading="lazy" style="object-position:50% 30%"><figcaption>cheek kisses</figcaption></figure>
+          <div class="face back"><span>😘</span><p>I'd take one of these every day, forever.</p></div>
+        </div>
+      </button>
+      <button class="card" type="button" aria-label="Flip photo">
+        <div class="card-inner">
+          <figure class="face front" style="margin:0"><img src="img/photo5.jpg" alt="Jay and Naty with an elephant" loading="lazy" style="object-position:50% 55%"><figcaption>wild ones</figcaption></figure>
+          <div class="face back"><span>🐘</span><p>Even the elephant knew we're perfect together.</p></div>
+        </div>
+      </button>
+      <button class="card" type="button" aria-label="Flip photo">
+        <div class="card-inner">
+          <figure class="face front" style="margin:0"><img src="img/photo6.jpg" alt="Jay lifting Naty up at sunset" loading="lazy" style="object-position:50% 68%"><figcaption>lift me up</figcaption></figure>
+          <div class="face back"><span>🌅</span><p>You lift me up, and I'll always hold you.</p></div>
         </div>
       </button>
     </div>
     <p class="hint">Tap a photo to flip it</p>
   </section>
 
-  <section id="letter" class="reveal">
+  <section id="letter" class="reveal words">
     <div class="letter">
       <p class="to">To my love,</p>
       <p id="type" aria-label="One month ago, everything changed. Every day since has been brighter, warmer and full of smiles because of you. Thank you for the laughs, the late-night talks and all the little moments that already mean the world. This is only the beginning of our story, and I can't wait to write every chapter with you."></p>
       <p class="sign">forever yours ♡</p>
     </div>
-  </section>
-
-  <section id="reasons" class="reveal">
+    <div class="reasons" id="reasons">
     <p class="eyebrow">Reasons I love you</p>
     <h2>Shuffle the deck</h2>
     <div class="reason-box"><p id="reason">The way you laugh at my worst jokes.</p></div>
     <p class="count" id="count">1 of 12</p>
     <button class="btn" id="next" type="button">Another reason 💌</button>
+    </div>
   </section>
 
   <section id="question" class="reveal">
